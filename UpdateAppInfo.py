@@ -59,7 +59,7 @@ class JSS(object):
         """Returns a list of dictionaries containing mobile device app data"""
         endpoint = '/JSSResource/mobiledeviceapps'
         #print("retrieving resource: ..{0}".format(endpoint))
-        request = urllib2.Request(self.server + endpoint)
+        request = urllib2.Request(self.server + endpoint, headers={"Accept" : "text/xml"})
         root = etree.fromstring(self.request(request))
         size = int(root.find('size').text)
         if size < 1:
@@ -107,7 +107,7 @@ class JSS(object):
         """Returns XML for a mobile device app or None"""
         endpoint = '/JSSResource/mobiledeviceapps/id/{0}/subset/general'.format(app_id)
         #print("retrieving resource: ..{0}".format(endpoint))
-        request = urllib2.Request(self.server + endpoint)
+        request = urllib2.Request(self.server + endpoint, headers={"Accept" : "text/xml"})
         return self.request(request)
 
     def update_mobile_device_app(self, app_id, app_dict):
